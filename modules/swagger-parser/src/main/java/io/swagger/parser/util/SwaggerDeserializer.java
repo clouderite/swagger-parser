@@ -517,6 +517,12 @@ public class SwaggerDeserializer {
                 map.put(PATTERN, pat);
                 sp.setPattern(pat);
 
+                // pattern
+                String xpat = getString("x-pattern", obj, false, location, result);
+                if(xpat != null) {
+                    sp.setPattern(xpat);
+                }
+
                 Integer iv = getInteger("maxItems", obj, false, location, result);
                 map.put(MAX_ITEMS, iv);
                 sp.setMaxItems(iv);
@@ -593,6 +599,8 @@ public class SwaggerDeserializer {
 
                 String collectionFormat = getString("collectionFormat", obj, false, location, result);
                 sp.setCollectionFormat(collectionFormat);
+
+                sp.setFormat(format);
 
                 output = sp;
             }
@@ -755,6 +763,9 @@ public class SwaggerDeserializer {
 
             value = getString("format", node, false, location, result);
             impl.setFormat(value);
+
+            value = getString("pattern", node, false, location, result);
+            impl.setPattern(value);
 
             value = getString("discriminator", node, false, location, result);
             impl.setDiscriminator(value);
